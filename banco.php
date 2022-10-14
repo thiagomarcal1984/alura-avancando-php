@@ -1,7 +1,20 @@
 <?php
 // Subrotina para exibir uma mensagem.
-function exibeMensagem($mensagem){
+function exibeMensagem($mensagem)
+{
     echo $mensagem . PHP_EOL;
+}
+
+// Subrotina para saque de valores de uma conta.
+function sacar($conta, $valorASacar)
+{
+    if ($valorASacar > $conta['saldo']){
+        exibeMensagem("Você não pode sacar um valor maior que o seu saldo.");
+    } else {
+        $conta['saldo'] -= $valorASacar;
+    }
+
+    return $conta; // PHP passa parâmetros por valor, não por referência.
 }
 
 $contasCorrentes = [
@@ -21,20 +34,8 @@ $contasCorrentes = [
 
 $saque = 500;
 
-if ($contasCorrentes['123.456.789-11']['saldo'] < $saque ) {
-    exibeMensagem("Você não pode sacar um valor maior que o seu saldo.");
-} else {
-    $contasCorrentes['123.456.789-11']['saldo'] -= $saque;
-    exibeMensagem("Valor sacado: " . $saque);
-}
-
-// Bad smell: repetição de código.
-if ($contasCorrentes['123.256.789-10']['saldo'] < $saque ) {
-    exibeMensagem("Você não pode sacar um valor maior que o seu saldo.");
-} else {
-    $contasCorrentes['123.256.789-10']['saldo'] -= $saque;
-    exibeMensagem("Valor sacado: " . $saque);
-}
+$contasCorrentes['123.456.789-11'] = sacar($contasCorrentes['123.456.789-11'], $saque);
+$contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], $saque);
 
 foreach ($contasCorrentes as $cpf => $conta) {
     exibeMensagem("$cpf: " . $conta['titular'] . " " . $conta['saldo']);
