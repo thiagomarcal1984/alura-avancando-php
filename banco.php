@@ -52,5 +52,13 @@ $contasCorrentes['123.456.789-10'] = depositar($contasCorrentes['123.456.789-10'
 // $contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], 'dinheiro');
 
 foreach ($contasCorrentes as $cpf => $conta) {
-    exibeMensagem("$cpf: " . $conta['titular'] . " " . $conta['saldo']);
+    exibeMensagem(
+        // "$cpf: " . $conta['titular'] . " " . $conta['saldo'] // Sintaxe com concatenações.
+        // "$cpf: $conta[titular]  $conta[saldo]" // Sintaxe simples.
+        "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
+        // '$cpf: {$conta["titular"]}  {$conta["saldo"]}' // Esta sintaxe não funciona.
+    );
 }
+
+// Mais informações sobre strings complexas:
+// Complex (curly) syntax: https://www.php.net/manual/en/language.types.string.php 
