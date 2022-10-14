@@ -1,4 +1,8 @@
 <?php
+// Subrotina para exibir uma mensagem.
+function exibeMensagem($mensagem){
+    echo $mensagem . PHP_EOL;
+}
 
 $contasCorrentes = [
     '123.456.789-10' => [
@@ -18,20 +22,20 @@ $contasCorrentes = [
 $saque = 500;
 
 if ($contasCorrentes['123.456.789-11']['saldo'] < $saque ) {
-    echo "Você não pode sacar um valor maior que o seu saldo." . PHP_EOL;
+    exibeMensagem("Você não pode sacar um valor maior que o seu saldo.");
 } else {
     $contasCorrentes['123.456.789-11']['saldo'] -= $saque;
-    echo "Valor sacado: " . $saque . PHP_EOL;
+    exibeMensagem("Valor sacado: " . $saque);
 }
 
 // Bad smell: repetição de código.
 if ($contasCorrentes['123.256.789-10']['saldo'] < $saque ) {
-    echo "Você não pode sacar um valor maior que o seu saldo." . PHP_EOL;
+    exibeMensagem("Você não pode sacar um valor maior que o seu saldo.");
 } else {
     $contasCorrentes['123.256.789-10']['saldo'] -= $saque;
-    echo "Valor sacado: " . $saque . PHP_EOL;
+    exibeMensagem("Valor sacado: " . $saque);
 }
 
 foreach ($contasCorrentes as $cpf => $conta) {
-    echo "$cpf: " . $conta['titular'] . " " . $conta['saldo'] . PHP_EOL;
+    exibeMensagem("$cpf: " . $conta['titular'] . " " . $conta['saldo']);
 }
