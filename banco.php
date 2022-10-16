@@ -33,10 +33,11 @@ $contasCorrentes = [
 ];
 
 $saque = 500;
-
+echo "<!-- " . PHP_EOL;
 $contasCorrentes['123.456.789-11'] = sacar($contasCorrentes['123.456.789-11'], $saque);
 $contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], $saque);
 $contasCorrentes['123.456.789-10'] = depositar($contasCorrentes['123.456.789-10'], 900);
+echo "--> " . PHP_EOL;
 
 // A linha abaixo vai causar um erro, porque o saque deve ser float, não string:
 // $contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], 'dinheiro');
@@ -46,7 +47,13 @@ unset($contasCorrentes['123.456.789-11']);
 
 titularComLetrasMaiusculas($contasCorrentes['123.256.789-10']);
 
-foreach ($contasCorrentes as $cpf => $conta) {
+        // "$cpf: " . $conta['titular'] . " " . $conta['saldo'] // Sintaxe com concatenações.
+        // "$cpf: $conta[titular]  $conta[saldo]" // Sintaxe simples.
+        // "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
+        // '$cpf: {$conta["titular"]}  {$conta["saldo"]}' // Esta sintaxe não funciona.
+        // Mais informações sobre strings complexas:
+        // Complex (curly) syntax: https://www.php.net/manual/en/language.types.string.php 
+
     // list() serve para declarar e atribuir variáveis a partir de um array.
     /*  Para arrays numéricos, a sintaxe abaixo já bastaria:
             list($titular, $saldo) = $conta;
@@ -55,24 +62,38 @@ foreach ($contasCorrentes as $cpf => $conta) {
         à variável:
             list('indice1' => $variavel1, 'indice2' => $variavel2) = $array;
     */
-    list('titular' => $titular, 'saldo' => $saldo) = $conta;
+    // list('titular' => $titular, 'saldo' => $saldo) = $conta;
 
     // list() pode ser substituído por colchetes!!!
-    ['titular' => $titular, 'saldo' => $saldo] = $conta; 
-    exibeMensagem(
-        // "$cpf: " . $conta['titular'] . " " . $conta['saldo'] // Sintaxe com concatenações.
-        // "$cpf: $conta[titular]  $conta[saldo]" // Sintaxe simples.
-        // "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
-        // '$cpf: {$conta["titular"]}  {$conta["saldo"]}' // Esta sintaxe não funciona.
-        // Mais informações sobre strings complexas:
-        // Complex (curly) syntax: https://www.php.net/manual/en/language.types.string.php 
-
-        "$cpf $titular $saldo"
-    );
-}
+    // ['titular' => $titular, 'saldo' => $saldo] = $conta; 
 
 /*  Para rodar o código no servidor web embutido no PHP, use o comando:
         php -S localhost:80
     
     Depois visite o seguinte caminho para a página banco.php: http://localhost/banco.php
 */
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Contas correntes</h1>
+    <?php foreach($contasCorrentes as $cpf => $conta) : ?>
+    <dl>
+        <dt>
+            <h3><?= $conta['titular']; ?> - CPF <?= $cpf; ?></h3>
+        </dt>
+
+        <dd>
+            Saldo: <?= $conta['saldo']; ?>
+        </dd>
+    </dl>
+    <?php endforeach ?>
+</body>
+</html>

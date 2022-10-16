@@ -3,7 +3,7 @@
 // Subrotina para exibir uma mensagem.
 function exibeMensagem(string $mensagem)
 {
-    echo $mensagem . PHP_EOL;
+    echo $mensagem . "<br>" . PHP_EOL;
 }
 
 // Subrotina para saque de valores de uma conta.
@@ -36,4 +36,10 @@ function titularComLetrasMaiusculas(array &$conta) : void
 {
     $conta['titular'] = mb_strtoupper($conta['titular']);
     // $conta['saldo'] = 0; // O perigo de se usar parâmetros por referência!
+}
+
+function exibeConta(array $conta)
+{
+    ['titular' => $titular, 'saldo' => $saldo] = $conta;
+    echo "<li>Titular: $titular . Saldo: $saldo </li>" . PHP_EOL;
 }
