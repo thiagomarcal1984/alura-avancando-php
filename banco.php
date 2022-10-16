@@ -41,6 +41,8 @@ $contasCorrentes['123.456.789-10'] = depositar($contasCorrentes['123.456.789-10'
 // A linha abaixo vai causar um erro, porque o saque deve ser float, não string:
 // $contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], 'dinheiro');
 
+titularComLetrasMaiusculas($contasCorrentes['123.256.789-10']);
+
 foreach ($contasCorrentes as $cpf => $conta) {
     exibeMensagem(
         // "$cpf: " . $conta['titular'] . " " . $conta['saldo'] // Sintaxe com concatenações.

@@ -28,3 +28,12 @@ function depositar(array $conta, float $deposito) : array
     return $conta;
 }
 
+// Repare que o parâmetro $conta é precedido de um ampersand (&).
+// Sem isso, o parâmetro é fornecido por valor (cópia).
+// Com o ampersand, o parâmetro é fornecido por referência (endereço).
+function titularComLetrasMaiusculas(array &$conta) : void
+// function titularComLetrasMaiusculas(array $conta) : void
+{
+    $conta['titular'] = mb_strtoupper($conta['titular']);
+    // $conta['saldo'] = 0; // O perigo de se usar parâmetros por referência!
+}
