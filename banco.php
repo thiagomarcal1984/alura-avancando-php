@@ -44,11 +44,25 @@ $contasCorrentes['123.456.789-10'] = depositar($contasCorrentes['123.456.789-10'
 titularComLetrasMaiusculas($contasCorrentes['123.256.789-10']);
 
 foreach ($contasCorrentes as $cpf => $conta) {
+    // list() serve para declarar e atribuir variáveis a partir de um array.
+    /*  Para arrays numéricos, a sintaxe abaixo já bastaria:
+            list($titular, $saldo) = $conta;
+
+        Mas como o array $conta é associativo, é necessário relacionar o índice
+        à variável:
+            list('indice1' => $variavel1, 'indice2' => $variavel2) = $array;
+    */
+    list('titular' => $titular, 'saldo' => $saldo) = $conta;
+
+    // list() pode ser substituído por colchetes!!!
+    ['titular' => $titular, 'saldo' => $saldo] = $conta; 
     exibeMensagem(
         // "$cpf: " . $conta['titular'] . " " . $conta['saldo'] // Sintaxe com concatenações.
         // "$cpf: $conta[titular]  $conta[saldo]" // Sintaxe simples.
-        "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
+        // "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
         // '$cpf: {$conta["titular"]}  {$conta["saldo"]}' // Esta sintaxe não funciona.
+
+        "$cpf $titular $saldo"
     );
 }
 
