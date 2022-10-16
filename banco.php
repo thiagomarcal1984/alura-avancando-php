@@ -41,6 +41,9 @@ $contasCorrentes['123.456.789-10'] = depositar($contasCorrentes['123.456.789-10'
 // A linha abaixo vai causar um erro, porque o saque deve ser float, não string:
 // $contasCorrentes['123.256.789-10'] = sacar($contasCorrentes['123.256.789-10'], 'dinheiro');
 
+// unset remove a variável da memoria. Jeito mais fácil de remover elemento de um a lista.
+unset($contasCorrentes['123.456.789-11']);
+
 titularComLetrasMaiusculas($contasCorrentes['123.256.789-10']);
 
 foreach ($contasCorrentes as $cpf => $conta) {
