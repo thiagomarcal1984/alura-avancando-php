@@ -64,10 +64,15 @@ foreach ($contasCorrentes as $cpf => $conta) {
         // "$cpf: $conta[titular]  $conta[saldo]" // Sintaxe simples.
         // "$cpf: {$conta['titular']}  {$conta['saldo']}" // Sintaxe complexa, com chaves e aspas simples.
         // '$cpf: {$conta["titular"]}  {$conta["saldo"]}' // Esta sintaxe não funciona.
+        // Mais informações sobre strings complexas:
+        // Complex (curly) syntax: https://www.php.net/manual/en/language.types.string.php 
 
         "$cpf $titular $saldo"
     );
 }
 
-// Mais informações sobre strings complexas:
-// Complex (curly) syntax: https://www.php.net/manual/en/language.types.string.php 
+/*  Para rodar o código no servidor web embutido no PHP, use o comando:
+        php -S localhost:80
+    
+    Depois visite o seguinte caminho para a página banco.php: http://localhost/banco.php
+*/
